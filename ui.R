@@ -1,5 +1,4 @@
 library(shinythemes)
-library(shiny)
 
 # Define UI for application
 navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cyborg"),

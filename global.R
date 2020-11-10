@@ -1,3 +1,5 @@
+library(shiny)
+
 getData <- function(infoRequested) {
   # Load required libraries
   library(httr)
