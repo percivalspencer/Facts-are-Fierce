@@ -5,7 +5,8 @@ function(input, output, session) {
 
   # Code for first tab (Meet the Queens)
   observeEvent(c(input$seasonTab1, input$refreshTab1), {
-
+    # Get data for selected season
+    data <- getData(paste0("seasons/", input$seasonTab1, "/queens"))
   })
 
 }
