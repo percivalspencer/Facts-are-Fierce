@@ -19,3 +19,8 @@ getData <- function(infoRequested) {
 
   return(data)
 }
+
+# Gather numbers of all available seasons and sort them
+library(gtools)
+seasonNumbers <- getData("seasons")[,c("seasonNumber", "id")]
+seasonNumbers <- seasonNumbers[mixedorder(seasonNumbers$seasonNumber),]
