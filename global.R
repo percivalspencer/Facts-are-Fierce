@@ -22,6 +22,8 @@ getData <- function(infoRequested) {
 }
 
 # Gather numbers of all available seasons and sort them
-library(gtools)
-seasonNumbers <- getData("seasons")[,c("seasonNumber", "id")]
-seasonNumbers <- seasonNumbers[mixedorder(seasonNumbers$seasonNumber),]
+library(tidyverse)
+seasonNumbers <- getData("seasons") %>%
+  select(seasonNumber, id) %>%
+  arrange(as.numeric(seasonNumber), seasonNumber) %>%
+  pivot_wider(names_from = seasonNumber, values_from = id)
