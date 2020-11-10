@@ -6,11 +6,11 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
 
            includeCSS("lewk.css"),
 
-           tabPanel("Meet the Queens", value = "home",
+           tabPanel("Meet the Queens", value = "tab1",
                     # Sidebar with a slider input for number of bins
                     sidebarLayout(
                         sidebarPanel(
-                            varSelectInput(inputId = "season",
+                            varSelectInput(inputId = "seasonTab1",
                                            label = "Season of Drag Race",
                                            data = mtcars$cyl,
                                            multiple = FALSE,
@@ -18,7 +18,7 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                                            width = NULL,
                                            size = NULL
                             ),
-                            actionButton(inputId = "refresh", label = "Refresh", icon = icon("refresh"), width = NULL)
+                            actionButton(inputId = "refreshTab1", label = "Refresh", icon = icon("refresh"), width = NULL)
                         ),
 
                         # Show a plot of the generated distribution
