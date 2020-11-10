@@ -1,5 +1,6 @@
 library(shiny)
 
+# Function requesting data from API and returning response as a data frame
 getData <- function(infoRequested) {
   # Load required libraries
   library(httr)
