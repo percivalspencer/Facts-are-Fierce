@@ -9,14 +9,13 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                     # Sidebar with a slider input for number of bins
                     sidebarLayout(
                         sidebarPanel(
-                            varSelectInput(inputId = "seasonTab1",
+                            selectInput(inputId = "seasonTab1",
                                            label = "Season of Drag Race",
-                                           data = mtcars$cyl,
+                                           choices = seasonNumbers,
                                            multiple = FALSE,
                                            selectize = TRUE,
                                            width = NULL,
-                                           size = NULL
-                            ),
+                                           size = NULL),
                             actionButton(inputId = "refreshTab1", label = "Refresh", icon = icon("refresh"), width = NULL)
                         ),
 
