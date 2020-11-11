@@ -5,8 +5,11 @@ function(input, output, session) {
 
   # Code for first tab (Meet the Queens)
   observeEvent(c(input$seasonTab1, input$refreshTab1), {
-    # Get data for selected season
-    data <- getData(paste0("seasons/", input$seasonTab1, "/queens"))
+    # Get data for selected season, unpack placing information and rank
+    data <- getData(paste0("seasons/", input$seasonTab1, "/queens")) %>%
+      unnest(cols = c(seasons), names_sep = "_") %>%
+      filter(seasons_id == input$seasonTab1) %>%
+      arrange(seasons_place)
 
     output$images <- renderUI({
       # Create a list of images to display in UI output
@@ -18,12 +21,7 @@ function(input, output, session) {
                capture.output(style <- "border: 2px solid #e83e8c;
                               padding: 2px 0px 2px 0px; "),
                # Set information for how queen placed in competition
-               capture.output(place <- data %>%
-                                filter(id == data$id[i]) %>%
-                                select(seasons) %>%
-                                unnest(cols = seasons) %>%
-                                filter(id == input$seasonTab1) %>%
-                                select(place)),
+               capture.output(place <- data$seasons_place[i]),
                # Label Winner of season and add green border
                if (data$winner[i]) {
                  style <- "border: 4px solid green; color: green; "
