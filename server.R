@@ -3,16 +3,19 @@ function(input, output, session) {
 
   isolate({updateNavbarPage(session, inputId = "mainNav", selected = "tab1")})
 
+  # Make data being displayed available to all server functions
+  data <- NULL
+
   # Code for first tab (Meet the Queens)
   observeEvent(c(input$seasonTab1, input$refreshTab1), {
     # Get data for selected season
-    data <- getData(paste0("seasons/", input$seasonTab1, "/queens"))
+    data <<- getData(paste0("seasons/", input$seasonTab1, "/queens"))
 
     if (length(data) == 0) {
       output$images <- renderUI({tags$h2("The data you requested is not available from the No Key No Shade API for this season yet")})
     } else {
       # uUpack placing information and rank queens
-      data <- data %>%
+      data <<- data %>%
         unnest(cols = c(seasons), names_sep = "_") %>%
         filter(seasons_id == input$seasonTab1) %>%
         arrange(seasons_place)
@@ -56,5 +59,11 @@ function(input, output, session) {
         })
       })
     }
+  })
+
+  # Code to download data for first tab (Meet the Queens)
+  observeEvent(input$downloadTab1, {
+    print(data)
+    write.csv2(data, paste0("Queens of season ", names(seasonNumbers[,input$seasonTab1]), ".csv"))
   })
 }
