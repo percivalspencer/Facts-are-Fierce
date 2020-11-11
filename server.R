@@ -16,9 +16,14 @@ function(input, output, session) {
                # capture.output prevents variable data from randomly displaying in UI
                # Set default figure style elements
                capture.output(style <- "border: 2px solid #e83e8c;
-                              padding: 31px 0px 5px 0px; "),
+                              padding: 2px 0px 2px 0px; "),
                # Set information for how queen placed in competition
-               capture.output(place <- " "),
+               capture.output(place <- data %>%
+                                filter(id == data$id[i]) %>%
+                                select(seasons) %>%
+                                unnest(cols = seasons) %>%
+                                filter(id == input$seasonTab1) %>%
+                                select(place)),
                # Label Winner of season and add green border
                if (data$winner[i]) {
                  style <- "border: 4px solid green; color: green; "
