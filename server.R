@@ -16,7 +16,7 @@ function(input, output, session) {
                # capture.output prevents variable data from randomly displaying in UI
                # Set default figure style elements
                capture.output(style <- "border: 2px solid #e83e8c;
-                              padding: 32px 0px 6px 0px; "),
+                              padding: 31px 0px 5px 0px; "),
                # Set information for how queen placed in competition
                capture.output(place <- " "),
                # Label Winner of season and add green border
