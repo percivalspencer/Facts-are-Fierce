@@ -61,9 +61,14 @@ function(input, output, session) {
     }
   })
 
-  # Code to download data for first tab (Meet the Queens)
-  observeEvent(input$downloadTab1, {
-    print(data)
-    write.csv2(data, paste0("Queens of season ", names(seasonNumbers[,input$seasonTab1]), ".csv"))
-  })
+  # Code to download data for first tab (Meet the Queens) in csv format
+  output$downloadTab1 <- downloadHandler(
+    filename = function() {
+      paste0("Queens of season ", names(seasonNumbers)[which(
+        seasonNumbers == input$seasonTab1, arr.ind = TRUE)[,"col"]], ".csv")
+    },
+    content = function(file) {
+      write.csv2(data, file)
+    }
+  )
 }

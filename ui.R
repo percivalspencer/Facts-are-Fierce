@@ -19,9 +19,8 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                                      label = "Refresh",
                                      icon = icon("refresh"),
                                      width = NULL),
-                        actionButton(inputId = "downloadTab1",
+                        downloadButton(outputId = "downloadTab1",
                                      label = "Download Data",
-                                     icon = icon("file-download"),
                                      width = NULL),
                       ),
 
