@@ -3,18 +3,22 @@ function(input, output, session) {
 
   isolate({updateNavbarPage(session, inputId = "mainNav", selected = "tab1")})
 
+  # Set a timer to refresh the app data every hour
+  autoInvalidate <- reactiveTimer(3600000)
+
   # Make data being displayed available to all server functions
   data <- NULL
 
   # Code for first tab (Meet the Queens)
-  observeEvent(c(input$seasonTab1, input$refreshTab1), {
+  observeEvent(c(input$seasonTab1, input$refreshTab1, autoInvalidate()), {
     # Get data for selected season
     data <<- getData(paste0("seasons/", input$seasonTab1, "/queens"))
 
+    # Display error for season data that is unavailable
     if (length(data) == 0) {
       output$images <- renderUI({tags$h2("The data you requested is not available from the No Key No Shade API for this season yet")})
     } else {
-      # uUpack placing information and rank queens
+      # Unpack placing information and rank queens
       data <<- data %>%
         unnest(cols = c(seasons), names_sep = "_") %>%
         filter(seasons_id == input$seasonTab1) %>%
