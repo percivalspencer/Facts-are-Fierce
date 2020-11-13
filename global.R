@@ -1,4 +1,6 @@
 library(shiny)
+library(shinyjs)
+library(shinyWidgets)
 
 # Function requesting data from API and returning response as a data frame
 getData <- function(infoRequested) {

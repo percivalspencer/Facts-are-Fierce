@@ -47,3 +47,26 @@ body {
 #downloadTab1 {
   margin: 10px 5px 10px 5px;
 }
+
+.material-switch {
+  font-weight: bold;
+}
+
+.material-switch>label,
+.pagination>.active>a,
+.pagination>.active>a:hover,
+.pagination>li>a:hover {
+  background-color: #e83e8c;
+}
+
+.material-switch>label:before {
+  background-color: #777;
+}
+
+input[type=text] {
+  color: #e83e8c;
+}
+
+#challengesOutTitle {
+  text-align: center;
+}

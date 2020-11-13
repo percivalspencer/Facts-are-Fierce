@@ -30,6 +30,41 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                         )
                       )
                     )
+           ),
+
+           tabPanel("Challenges", value = "tab2",
+                    sidebarLayout(
+                      sidebarPanel(
+                        selectInput(inputId = "seasonTab2",
+                                    label = "Season of Drag Race",
+                                    choices = seasonNumbers,
+                                    multiple = FALSE,
+                                    selectize = TRUE,
+                                    width = NULL,
+                                    size = NULL),
+                        radioButtons(inputId = "outputTypeTab2",
+                                     label = "Display format",
+                                     choices = c("Barchart summarising challenges won" = "Plot",
+                                                 "Table detailing challenge information" = "Table")),
+                        materialSwitch(inputId = "showQueensTab2",
+                                       label = "Show queens in table",
+                                       value = TRUE),
+                        actionButton(inputId = "refreshTab2",
+                                     label = "Refresh",
+                                     icon = icon("refresh"),
+                                     width = NULL),
+                        downloadButton(outputId = "downloadTab2",
+                                       label = "Download Data",
+                                       width = NULL),
+                      ),
+
+                      mainPanel(
+                        useShinyjs(),
+                        h4(textOutput("challengesOutTitle")),
+                        plotOutput(outputId = "challengesPlot"),
+                        dataTableOutput(outputId = "challengesTbl")
+                      )
+                    )
            )
 )
 
