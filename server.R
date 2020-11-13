@@ -54,7 +54,7 @@ function(input, output, session) {
                                           margin: 5px 5px 5px 5px"),
                              tags$h5(place),
                              tags$img(src = data[i,"image_url"],
-                                      width = 190, height = 350,
+                                      width = 190, height = 280,
                                       alt = data[i, "name"],
                                       align = "center"),
                              tags$figcaption(tags$h5(data[i, "name"]))
