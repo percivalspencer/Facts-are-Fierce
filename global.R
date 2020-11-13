@@ -1,6 +1,7 @@
+# Load required global libraries
 library(shiny)
 library(shinyjs)
-library(shinyWidgets)
+library(tidyverse)
 
 # Function requesting data from API and returning response as a data frame
 getData <- function(infoRequested) {
@@ -24,7 +25,6 @@ getData <- function(infoRequested) {
 }
 
 # Gather numbers of all available seasons and sort them
-library(tidyverse)
 seasonNumbers <- getData("seasons") %>%
   select(seasonNumber, id) %>%
   arrange(as.numeric(seasonNumber), seasonNumber) %>%

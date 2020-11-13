@@ -1,4 +1,6 @@
+# Load libraries required for UI
 library(shinythemes)
+library(shinyWidgets)
 
 # Define UI for application
 navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cyborg"),
