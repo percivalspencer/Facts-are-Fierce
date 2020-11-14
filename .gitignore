@@ -41,3 +41,6 @@ vignettes/*.pdf
 
 # Mac Files
 .DS_Store
+
+# rsconnect folder from publishing app
+/rsconnect
