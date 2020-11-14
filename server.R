@@ -67,8 +67,7 @@ function(input, output, session) {
   # Code to download data for first tab (Meet the Queens) in csv format
   output$downloadTab1 <- downloadHandler(
     filename = function() {
-      paste0("Queens of season ", names(seasonNumbers)[which(
-        seasonNumbers == input$seasonTab1, arr.ind = TRUE)[,"col"]], ".csv")
+      paste0("Queens of season ", getSeasonName(input$seasonTab1), ".csv")
     },
     content = function(file) {
       write.csv2(tab1data, file)
@@ -97,7 +96,7 @@ function(input, output, session) {
            summarise(Wins = sum(queens_won), .groups = "rowwise") %>%
            arrange(desc(Wins))
 
-         output$challengesOutTitle <- renderText(paste0("Barchart summarising the total number of challenges won by each queen\n in Season ", input$seasonTab2, " of RuPaul's Drag Race"))
+         output$challengesOutTitle <- renderText(paste0("Barchart summarising the total number of challenges won by each queen\n in ", getSeasonName(input$seasonTab2, TRUE)))
          output$challengesPlot <- renderPlot({
            ggplot(tab2data, mapping = aes(x = Queen, y = Wins, fill = Queen)) +
              geom_bar(stat = "identity", show.legend = FALSE) +
@@ -129,7 +128,8 @@ function(input, output, session) {
              select(!queens)
          }
 
-         output$challengesOutTitle <- renderText(paste0("Table showing details of challenges from Season ", input$seasonTab2, " of RuPaul's Drag Race"))
+         output$challengesOutTitle <- renderText(paste0("Table showing details of challenges from ",
+                                                        getSeasonName(input$seasonTab2, TRUE)))
          output$challengesTbl <- renderDataTable(tab2data)
          show("challengesTbl")
        }
@@ -141,12 +141,12 @@ function(input, output, session) {
   output$downloadTab2 <- downloadHandler(
     filename = function() {
       if (input$outputTypeTab2 == "Plot") {
-        paste0("Num challenges won by queens in season ", names(seasonNumbers)[which(
-          seasonNumbers == input$seasonTab2, arr.ind = TRUE)[,"col"]], ".csv")
+        paste0("Num challenges won by queens in season ",
+               getSeasonName(input$seasonTab2), ".csv")
       }
       else if (input$outputTypeTab2 == "Table") {
-        paste0("Challenge details from season ", names(seasonNumbers)[which(
-          seasonNumbers == input$seasonTab2, arr.ind = TRUE)[,"col"]], ".csv")
+        paste0("Challenge details from season ",
+               getSeasonName(input$seasonTab2), ".csv")
       }
     },
     content = function(file) {
