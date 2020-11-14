@@ -1,8 +1,10 @@
+/*Load font*/
 @font-face {
   font-family: "Aerokids";
   src: url("Aerokids.otf") format("embedded-opentype");
 }
 
+/*Style app name*/
 .navbar-brand {
   font-family: "Aerokids";
   font-size: 4.5rem;
@@ -14,10 +16,12 @@
 				  -1px -1px 0 #e83e8c;
 }
 
+/*Change text colour to pink*/
 body {
   color: #e83e8c;
 }
 
+/*Make space for stylised app name*/
 .navbar {
   min-height: 80px;
 }
@@ -43,6 +47,7 @@ body {
   }
 }
 
+/*Space out refresh and download buttons*/
 #refreshTab1,
 #downloadTab1,
 #refreshTab2,
@@ -52,10 +57,12 @@ body {
   margin: 10px 5px 10px 5px;
 }
 
+/*Make material switch label bold*/
 .material-switch {
   font-weight: bold;
 }
 
+/*Make background of (table) additional page tab buttons pink*/
 .material-switch>label,
 .pagination>.active>a,
 .pagination>.active>a:hover,
@@ -63,14 +70,17 @@ body {
   background-color: #e83e8c;
 }
 
+/*Make material switch more visible when set to FALSE*/
 .material-switch>label:before {
   background-color: #777;
 }
 
+/*Colour table filter box text pink (when user starts typing)*/
 input[type=text] {
   color: #e83e8c;
 }
 
+/*Centre barchart and table titles*/
 #challengesOutTitle,
 #lipsyncsOutTitle {
   text-align: center;
