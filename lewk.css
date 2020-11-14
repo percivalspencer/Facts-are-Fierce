@@ -44,7 +44,11 @@ body {
 }
 
 #refreshTab1,
-#downloadTab1 {
+#downloadTab1,
+#refreshTab2,
+#downloadTab2,
+#refreshTab3,
+#downloadTab3 {
   margin: 10px 5px 10px 5px;
 }
 
@@ -67,6 +71,7 @@ input[type=text] {
   color: #e83e8c;
 }
 
-#challengesOutTitle {
+#challengesOutTitle,
+#lipsyncsOutTitle {
   text-align: center;
 }

@@ -67,6 +67,41 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                         dataTableOutput(outputId = "challengesTbl")
                       )
                     )
+           ),
+
+           tabPanel("Lipsyncs", value = "tab3",
+                    sidebarLayout(
+                      sidebarPanel(
+                        selectInput(inputId = "seasonTab3",
+                                    label = "Season of Drag Race",
+                                    choices = seasonNumbers,
+                                    multiple = FALSE,
+                                    selectize = TRUE,
+                                    width = NULL,
+                                    size = NULL),
+                        radioButtons(inputId = "outputTypeTab3",
+                                     label = "Display format",
+                                     choices = c("Barchart summarising lipsyncs won" = "Plot",
+                                                 "Table detailing lipsync information" = "Table")),
+                        materialSwitch(inputId = "showQueensTab3",
+                                       label = "Show queens in table",
+                                       value = TRUE),
+                        actionButton(inputId = "refreshTab3",
+                                     label = "Refresh",
+                                     icon = icon("refresh"),
+                                     width = NULL),
+                        downloadButton(outputId = "downloadTab3",
+                                       label = "Download Data",
+                                       width = NULL),
+                      ),
+
+                      mainPanel(
+                        useShinyjs(),
+                        h4(textOutput("lipsyncsOutTitle")),
+                        plotOutput(outputId = "lipsyncsPlot"),
+                        dataTableOutput(outputId = "lipsyncsTbl")
+                      )
+                    )
            )
 )
 

@@ -7,6 +7,7 @@ function(input, output, session) {
   # Make data being displayed available to all server functions
   tab1data <- NULL
   tab2data <- NULL
+  tab3data <- NULL
 
   # Code for first tab (Meet the Queens)
   observeEvent(c(input$seasonTab1, input$refreshTab1, autoInvalidate()), {
@@ -16,7 +17,8 @@ function(input, output, session) {
     # Display error for season data that is unavailable
     if (length(tab1data) <= 1 | class(tab1data) == "list") {
       output$images <- renderUI({tags$h2("The data you requested is not available from the No Key No Shade API for this season yet")})
-    } else {
+    }
+    else {
       # Unpack placing information and rank queens
       tab1data <<- tab1data %>%
         unnest(cols = c(seasons), names_sep = "_") %>%
@@ -85,7 +87,8 @@ function(input, output, session) {
        output$challengesOutTitle <- renderText("The data you requested is not available from the No Key No Shade API for this season yet")
        hide("challengesPlot")
        hide("challengesTbl")
-     } else {
+     }
+    else {
        if (input$outputTypeTab2 == "Plot") {
          hide("challengesTbl")
 
@@ -151,6 +154,87 @@ function(input, output, session) {
     },
     content = function(file) {
       write.csv2(tab2data, file)
+    }
+  )
+
+  # Code for third tab (Lipsyncs)
+  observeEvent(c(input$seasonTab3, input$outputTypeTab3, input$showQueensTab3,
+                 input$refreshTab3, autoInvalidate()), {
+     # Get data for selected season
+     tab3data <<- getData(paste0("seasons/", input$seasonTab3, "/lipsyncs"))
+
+     # Display error for season data that is unavailable
+     if (length(tab3data) <= 1 | class(tab3data) == "list") {
+       output$lipsyncsOutTitle <- renderText("The data you requested is not available from the No Key No Shade API for this season yet")
+       hide("lipsyncsPlot")
+       hide("lipsyncsTbl")
+     }
+     else {
+       if (input$outputTypeTab3 == "Plot") {
+         hide("lipsyncsTbl")
+
+         # Summarise lipsync wins per queen and rank accordingly
+         tab3data <<- tab3data %>%
+           unnest(cols = c(queens), names_sep = "_") %>%
+           group_by(Queen = queens_name) %>%
+           summarise(Wins = sum(queens_won), .groups = "rowwise") %>%
+           arrange(desc(Wins))
+
+         output$lipsyncsOutTitle <- renderText(paste0("Barchart summarising the total number of lipsyncs won by each queen\n in ", getSeasonName(input$seasonTab3, TRUE)))
+         output$lipsyncsPlot <- renderPlot({
+           ggplot(tab3data, mapping = aes(x = Queen, y = Wins, fill = Queen)) +
+             geom_bar(stat = "identity", show.legend = FALSE) +
+             coord_flip()
+         })
+         show("lipsyncsPlot")
+       }
+       else if (input$outputTypeTab3 == "Table") {
+         hide("lipsyncsPlot")
+
+         # Remove lipsync ID, rename columns, and move episode ID to beginning
+         tab3data <<- tab3data %>%
+           select(!id) %>%
+           rename(`Episode ID` = episodeId, `Song` = name,
+                  Artist = artist) %>%
+           relocate(`Episode ID`)
+
+         # Show information for specific queens if selected
+         if (input$showQueensTab3) {
+           # Unpack winning information for queens and remove unnecessary ID
+           tab3data <<- tab3data %>%
+             unnest(cols = c(queens), names_sep = "_") %>%
+             select(!queens_id) %>%
+             rename(`Queen Name` = queens_name, `Queen Won` = queens_won)
+         }
+         else {
+           # Remove queen data from table
+           tab3data <<- tab3data %>%
+             select(!queens)
+         }
+
+         output$lipsyncsOutTitle <- renderText(paste0("Table showing details of lipsyncs from ",
+                                                        getSeasonName(input$seasonTab3, TRUE)))
+         output$lipsyncsTbl <- renderDataTable(tab3data)
+         show("lipsyncsTbl")
+       }
+     }
+
+    })
+
+  # Code to download data for third tab (Lipsyncs) in csv format
+  output$downloadTab3 <- downloadHandler(
+    filename = function() {
+      if (input$outputTypeTab3 == "Plot") {
+        paste0("Num lipsyncs won by queens in season ",
+               getSeasonName(input$seasonTab3), ".csv")
+      }
+      else if (input$outputTypeTab3 == "Table") {
+        paste0("Lipsync details from season ",
+               getSeasonName(input$seasonTab3), ".csv")
+      }
+    },
+    content = function(file) {
+      write.csv2(tab3data, file)
     }
   )
 
