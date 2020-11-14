@@ -4,8 +4,6 @@ library(shinyWidgets)
 
 # Define UI for application
 navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cyborg"),
-           # Include custom CSS formatting
-           includeCSS("lewk.css"),
 
            tabPanel("Meet the Queens", value = "tab1",
                     sidebarLayout(
@@ -102,6 +100,9 @@ navbarPage(title = "Facts are Fierce", id = "mainNav", theme = shinytheme("cybor
                         dataTableOutput(outputId = "lipsyncsTbl")
                       )
                     )
-           )
+           ),
+
+           # Include custom CSS formatting
+           includeCSS("lewk.css")
 )
 
