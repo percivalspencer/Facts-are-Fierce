@@ -1,12 +1,9 @@
 /*Load font*/
-@font-face {
-  font-family: "Aerokids";
-  src: url("Aerokids.otf") format("embedded-opentype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
 
 /*Style app name*/
 .navbar-brand {
-  font-family: "Aerokids";
+  font-family: 'Lobster Two', cursive;
   font-size: 4.5rem;
   font-weight: 400;
   color: #e83e8c;
