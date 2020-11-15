@@ -4,7 +4,7 @@ This app has been developed as part of a group project for a statistics module a
 
 The inspiration for which comes from the legendary reality television competition [**RuPaul's Drag Race**](https://www.facebook.com/rupaulsdragrace/). Data from the show is displayed in the app using the sickening [**No Key No Shade** API](https://drag-race-api.readme.io/docs).
 
-The published app is hosted at: <https://percivalspencer.shinyapps.io/mt5763_shiny/>
+The published app is hosted at: <https://percivalspencer.shinyapps.io/facts-are-fierce/>
 
 ## Main features
 
