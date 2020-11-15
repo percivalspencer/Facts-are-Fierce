@@ -1,16 +1,29 @@
 /*Load font*/
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+@font-face {
+  font-family: 'Aerokids';
+  src: url('Aerokids.eot');
+  src: url('Aerokids.eot?#iefix') format('embedded-opentype'),
+       url('Aerokids.svg#Aerokids') format('svg'),
+       url('Aerokids.ttf') format('truetype'),
+       url('Aerokids.woff') format('woff'),
+       url('Aerokids.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /*Style app name*/
 .navbar-brand {
-  font-family: 'Lobster Two', cursive;
+  font-family: 'Aerokids', Fallback, 'Lobster Two', cursive;
   font-size: 4.5rem;
   font-weight: 400;
-  color: #e83e8c;
-  text-shadow: -1px 1px 2px #e83e8c,
-				  1px 1px 2px #e83e8c,
-				  1px -1px 0 #e83e8c,
-				  -1px -1px 0 #e83e8c;
+  color: #e83e8c !important;
+  text-shadow: -1px 1px 2px white,
+				  1px 1px 2px white,
+				  1px -1px 0 white,
+				  -1px -1px 0 white;
+  -webkit-text-fill-color: #e83e8c;
+  -webkit-text-stroke: 1px white;
 }
 
 /*Change text colour to pink*/

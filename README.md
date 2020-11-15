@@ -26,5 +26,8 @@ Users can then navigate to either the "Challenges" or "Lipsyncs" tabs using the 
 
 ## Licencing
 
-References to all the resources used to produce this app are included in the project report available in the **private** repository on GitHub at: <https://github.com/csheehan10/MT5763_ProperJob>. Requests for access or for a copy of the references can be sent to <https://github.com/percivalspencer>.
+References to all the resources used to produce this app are included in the project report available in the **private** repository on GitHub at: <https://github.com/csheehan10/MT5763_ProperJob>. Requests for access or for a copy of the references can be sent to <https://github.com/percivalspencer>. 
+
+An extra special mention goes to iFonts where the [Aerokids Script font](https://ifonts.xyz/aerokids-script.html) which is used for the app name was obtained, and to [Online Font Converter](https://onlinefontconverter.com) which produced the necessary formats for it to be used.
+
 The app is made available under the Modified BSD licence for personal use with or without modification.
